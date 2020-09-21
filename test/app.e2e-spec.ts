@@ -19,6 +19,26 @@ describe('AppController (e2e)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
+      .expect('Welcome to my Movie API');
+  });
+
+  describe('/movies', () => {
+    it('movies (GET)', () => {
+      return request(app.getHttpServer())
+        .get('/movies')
+        .expect(200)
+        .expect([]);
+    });
+
+    it('movies (POST)', () => {
+      return request(app.getHttpServer())
+        .post('/movies')
+        .send({
+          title: 'Test',
+          year: 2000,
+          genres: ['test'],
+        })
+        .expect(201);
+    });
   });
 });
